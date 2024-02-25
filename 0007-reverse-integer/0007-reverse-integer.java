@@ -8,7 +8,6 @@ class Solution {
         long reversed = 0;
 
         while (x != 0) {
-            // Extract the last digit
             int digit = x % 10;
 
             // Check for potential overflow before updating the reversed integer
@@ -16,17 +15,15 @@ class Solution {
                 return 0;
             }
 
-            // Update the reversed integer
             reversed = reversed * 10 + digit;
 
             // Move to the next digit
             x /= 10;
         }
 
-        // Check if the reversed integer is within the 32-bit integer range
-        if (reversed < INT32_MIN || reversed > INT32_MAX) {
-            return 0;
-        }
+        // if (reversed < INT32_MIN || reversed > INT32_MAX) {
+        //     return 0;
+        // }
 
         return (int) reversed;
     }
