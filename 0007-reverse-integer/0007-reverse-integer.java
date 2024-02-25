@@ -14,7 +14,7 @@ class Solution {
             if (reversed > INT32_MAX / 10 || reversed < INT32_MIN / 10) {
                 return 0;
             }
-
+            
             reversed = reversed * 10 + digit;
 
             // Move to the next digit
