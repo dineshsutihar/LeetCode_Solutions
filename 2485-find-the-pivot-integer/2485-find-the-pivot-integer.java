@@ -21,29 +21,37 @@ class Solution {
         
         
         //lets use two pointer method
-        int sumLeft =1; 
-        int sumRight =n;
-        int leftValue =1; 
-        int rightValue =n;
+//         int sumLeft =1; 
+//         int sumRight =n;
+//         int leftValue =1; 
+//         int rightValue =n;
         
-         if (n == 1) return n;
+//          if (n == 1) return n;
         
         
-        while(leftValue<rightValue){
-            if(sumLeft<sumRight){
-                sumLeft += ++leftValue;
-            } else{
-               sumRight += --rightValue;
-            }
+//         while(leftValue<rightValue){
+//             if(sumLeft<sumRight){
+//                 sumLeft += ++leftValue;
+//             } else{
+//                sumRight += --rightValue;
+//             }
             
-            if(sumLeft == sumRight && leftValue + 1 == rightValue - 1){
-                return leftValue + 1;
-            }
-        }
+//             if(sumLeft == sumRight && leftValue + 1 == rightValue - 1){
+//                 return leftValue + 1;
+//             }
+//         }
         
-        return -1;
+//         return -1;
         
         
+        
+        //Math is the best lets use the formula to calculate the sum of natural numers 
+        
+        int x = (n*(n+1))/2;
+        int y = (int) Math.sqrt(x);
+        
+        if(y*y==x) return y;
+        else return -1;
         
     }
 }
