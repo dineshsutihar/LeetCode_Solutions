@@ -1,24 +1,25 @@
 class Solution {
-    public int numSubarraysWithSum(int[] nums, int goal) {
-        int totalCount = 0;
-        int currentSum = 0;
-        // {prefix: number of occurrence}
-        Map<Integer, Integer> freq = new HashMap<>(); // To store the frequency of prefix sums
+    // Helper function to count the number of subarrays with sum at most the given goal
+    private int slidingWindowAtMost(int[] nums, int goal) {
+        int start = 0, currentSum = 0, totalCount = 0;
 
-        for (int num : nums) {
-            currentSum += num;
-            if (currentSum == goal){
-                totalCount++;
+        // Iterate through the array using a sliding window approach
+        for (int end = 0; end < nums.length; end++) {
+            currentSum += nums[end];
+
+            // Adjust the window by moving the start pointer to the right
+            // until the sum becomes less than or equal to the goal
+            while (start <= end && currentSum > goal) {
+                currentSum -= nums[start++];
             }
 
-            // Check if there is any prefix sum that can be subtracted from the current sum to get the desired goal
-            if (freq.containsKey(currentSum - goal)){
-                totalCount += freq.get(currentSum - goal);
-            }
-
-            freq.put(currentSum, freq.getOrDefault(currentSum, 0) + 1);
+            // Update the total count by adding the length of the current subarray
+            totalCount += end - start + 1;
         }
-
         return totalCount;
+    }
+
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        return slidingWindowAtMost(nums, goal) - slidingWindowAtMost(nums, goal - 1);
     }
 }
