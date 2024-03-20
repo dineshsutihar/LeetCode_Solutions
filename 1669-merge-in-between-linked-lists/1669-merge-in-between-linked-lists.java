@@ -10,29 +10,26 @@
  */
 class Solution {
     public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
-        ListNode currNode= list1;
-        int index = 0;
+        ListNode prevNodeA = list1; 
+        ListNode nodeB = list1; 
         
-        while(index<a-1){
-            currNode = currNode.next;
-            index++;
+        //find a-1 & bth node 
+        for(int index = 0; index<b; index++ ){
+            if(index == a-1){
+                prevNodeA = nodeB; 
+            }
+            nodeB = nodeB.next;
         }
-
-        ListNode front = currNode; 
-        while(index <b+1){
-            currNode = currNode.next;
-            index++;
-        }
-        ListNode rear = currNode; 
         
-        
-        ListNode secondListTail = list2,secondListHead = list2;
-        while(secondListTail.next!=null){
-            secondListTail= secondListTail.next;
-
+        //find list2 end
+        ListNode list2End = list2; 
+        while(list2End.next!=null){
+            list2End = list2End.next; 
         }
-        front.next = secondListHead;
-        secondListTail.next = rear; 
+        prevNodeA.next = list2; 
+        list2End.next = nodeB.next; 
+        nodeB.next = null;
+        
         return list1;
     }
 }
