@@ -1,9 +1,19 @@
 class Solution {
     public int lengthOfLastWord(String s) {
-        String[] tokens = s.split(" ");
-        int len = tokens.length;
-        int lastWordLength = tokens[len-1].length();
-        return lastWordLength ;
+
+        int len = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) != ' ') len++;
+            else if (len != 0) break;
+        }
+        return len;
+    
+
+        //last approach 
+        // String[] tokens = s.split(" ");
+        // int len = tokens.length;
+        // int lastWordLength = tokens[len-1].length();
+        // return lastWordLength ;
         
        
         //Old Code
