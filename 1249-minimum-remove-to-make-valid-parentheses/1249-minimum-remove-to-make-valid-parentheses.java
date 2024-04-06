@@ -1,29 +1,63 @@
 class Solution {
     public String minRemoveToMakeValid(String s) {
-        Stack<Integer> stack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
         int n = s.length();
-        //find indexes invalid parantheses 
+        int extraOpen = 0; 
         for(int i=0; i<n; i++){
             char ch = s.charAt(i);
             if(ch == '('){
-                stack.push(i);
+                sb.append(ch);
+                extraOpen++;
             }else if(ch==')'){
-                if(stack.isEmpty() || s.charAt(stack.peek())==')'){
-                    stack.push(i);
-                }else if(!stack.isEmpty() || s.charAt(stack.peek())=='('){
-                    stack.pop();
+                if(extraOpen>0){
+                    sb.append(ch);
+                    extraOpen--;
+                }else if(extraOpen ==0){
+                    continue;
                 }
             }
-        }
-        // form the string by removing invalid indexes
-        StringBuilder sb = new StringBuilder();
-        for(int i =n-1;i>=0; i-- ){
-            if(!stack.isEmpty() && stack.peek() == i ){
-                stack.pop();
-                continue;
+            else{
+                sb.append(ch);
             }
-            sb.insert(0,s.charAt(i));
         }
+        
+        //remove the extra opens
+        n=sb.length();
+        for(int i=n-1; i>=0; i--){
+            if(extraOpen == 0){
+                break;
+            }
+            char ch = sb.charAt(i);
+            if(ch == '('){
+                sb.deleteCharAt(i);
+                extraOpen--;
+            }
+        }
+
+        
+
+        // Stack<Integer> stack = new Stack<>();
+        //find indexes invalid parantheses 
+        // for(int i=0; i<n; i++){
+        //     char ch = s.charAt(i);
+        //     if(ch == '('){
+        //         stack.push(i);
+        //     }else if(ch==')'){
+        //         if(stack.isEmpty() || s.charAt(stack.peek())==')'){
+        //             stack.push(i);
+        //         }else if(!stack.isEmpty() || s.charAt(stack.peek())=='('){
+        //             stack.pop();
+        //         }
+        //     }
+        // }
+        // // form the string by removing invalid indexes
+        // for(int i =n-1;i>=0; i-- ){
+        //     if(!stack.isEmpty() && stack.peek() == i ){
+        //         stack.pop();
+        //         continue;
+        //     }
+        //     sb.insert(0,s.charAt(i));
+        // }
         return sb.toString();
     }
 }
