@@ -6,6 +6,7 @@ class Solution {
             finalXor = finalXor^nums[i];
         }
         int count =0;
+        
         //find the different bits in finalXor or k
         while(k>0 || finalXor>0){
             if(k%2 != finalXor%2){
