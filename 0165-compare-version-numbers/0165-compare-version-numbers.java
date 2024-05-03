@@ -19,7 +19,6 @@ class Solution {
 // }
               
 //Alternative Approach 
-        
         int n1 = version1.length();
         int n2 = version2.length();
         int p1=0, p2=0;
