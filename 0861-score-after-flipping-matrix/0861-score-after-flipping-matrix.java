@@ -3,45 +3,26 @@ class Solution {
         int m = grid.length;
         int n = grid[0].length;
 
-        // Set first column
-        for (int i = 0; i < m; i++) {
-            if (grid[i][0] == 0) {
-                // Flip row
-                for (int j = 0; j < n; j++) {
-                    grid[i][j] = 1 - grid[i][j];
-                }
-            }
-        }
+        // Set score to summation of first column
+        int score = (1 << (n - 1)) * m;
 
-        // Optimize columns except first column
+        // Loop over all other columns
         for (int j = 1; j < n; j++) {
-            int countZero = 0;
-            // Count zeros
-            for(int i = 0; i < m; i++) {
-                if(grid[i][j] == 0) {
-                    countZero++;
+            int countSameBits = 0;
+            for (int i = 0; i < m; i++) {
+                // Count elements matching first in row
+                if (grid[i][j] == grid[i][0]) {
+                    countSameBits++;
                 }
             }
-            // Flip the column if there are more zeros for better score
-            if(countZero > m-countZero) {
-                for(int i = 0; i < m; i++) {
-                    grid[i][j] = 1 - grid[i][j];
-                }
-            }
+            // Calculate score based on the number of same bits in a column
+            countSameBits = Math.max(countSameBits, m - countSameBits);
+            // Calculate the score contribution for the current column
+            int columnScore = (1 << (n - j - 1)) * countSameBits;
+            // Add contribution to score
+            score += columnScore;
         }
 
-        // Calculate the final score considering bit positions
-        int score = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                // Left shift bit by place value of column to find column contribution
-                int columnScore = grid[i][j] << (n - j - 1);
-                // Add contribution to score
-                score += columnScore;
-            }
-        }
-
-        // return final result
         return score;
     }
 }
