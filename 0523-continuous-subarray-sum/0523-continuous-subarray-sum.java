@@ -16,31 +16,23 @@
 
 
 class Solution {
+
     public boolean checkSubarraySum(int[] nums, int k) {
-        // Map to store the remainder of the cumulative sum and the corresponding index
-        Map<Integer, Integer> remainderMap = new HashMap<>();
-        // Initialize with remainder 0 at index -1 to handle the case where the subarray starts from the beginning
-        remainderMap.put(0, -1);
-        
-        int cumulativeSum = 0;
+        int prefixMod = 0;
+        HashMap<Integer, Integer> modSeen = new HashMap<>();
+        modSeen.put(0, -1);
 
         for (int i = 0; i < nums.length; i++) {
-            cumulativeSum += nums[i];
-            int remainder = cumulativeSum % k;
-            
-            // Normalize the remainder to be positive
-            if (remainder < 0) {
-                remainder += k;
-            }
+            prefixMod = (prefixMod + nums[i]) % k;
 
-            if (remainderMap.containsKey(remainder)) {
-                // Check if the length of the subarray is at least 2
-                if (i - remainderMap.get(remainder) > 1) {
+            if (modSeen.containsKey(prefixMod)) {
+                // ensures that the size of subarray is at least 2
+                if (i - modSeen.get(prefixMod) > 1) {
                     return true;
                 }
             } else {
-                // Store the first occurrence of this remainder
-                remainderMap.put(remainder, i);
+                // mark the value of prefixMod with the current index.
+                modSeen.put(prefixMod, i);
             }
         }
 
