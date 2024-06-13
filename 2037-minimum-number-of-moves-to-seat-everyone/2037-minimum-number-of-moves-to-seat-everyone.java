@@ -6,8 +6,8 @@ class Solution {
         
         int size = seats.length;
         
-        int totalMove = 0; 
-        for(int i =0; i<size; i++){
+        int totalMove = Math.abs(seats[0]-students[0]);
+        for(int i =1; i<size; i++){
             // if(seats[i]==students[i]){
             //     totalMove= totalMove +0; 
             // }
