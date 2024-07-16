@@ -38,13 +38,16 @@ class Solution {
             return true;
         }
         
-        path.append('L');
-        if(findPath(root.left, target, path)){
+        if(root.left!=null){
+            path.append('L');
+            if(findPath(root.left, target, path)){
             return true; 
+            }
+        
+            //backtracking 
+            path.setLength(path.length()-1);
         }
         
-        //backtracking 
-        path.setLength(path.length()-1);
         path.append('R');
         if(findPath(root.right, target, path)){
             return true; 
