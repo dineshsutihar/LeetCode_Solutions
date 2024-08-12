@@ -1,22 +1,25 @@
 class KthLargest {
-    ArrayList<Integer> nums = new ArrayList<>();
-    int k;
+    private PriorityQueue<Integer> minHeap;
+    private int k;
 
     public KthLargest(int k, int[] nums) {
-        // Add elements from the array to the list
-        for (int num : nums) {
-            this.nums.add(num);
-        }
-        Collections.sort(this.nums);
         this.k = k;
+        this.minHeap = new PriorityQueue<>(k); // Initialize the min-heap with a maximum size of k
+
+        for (int num : nums) {
+            add(num); // Add elements to the heap
+        }
     }
-    
+
     public int add(int val) {
-        int index = Collections.binarySearch(nums, val);
-        if (index < 0) index = -index - 1; 
-        nums.add(index, val);
-        
-        return nums.get(nums.size() - k);
+        if (minHeap.size() < k) {
+            minHeap.offer(val); // Add to the heap if size is less than k
+        } else if (val > minHeap.peek()) {
+            minHeap.poll(); // Remove the smallest element
+            minHeap.offer(val); // Add the new element
+        }
+
+        return minHeap.peek(); // The root of the heap is the k-th largest element
     }
 }
 /**
