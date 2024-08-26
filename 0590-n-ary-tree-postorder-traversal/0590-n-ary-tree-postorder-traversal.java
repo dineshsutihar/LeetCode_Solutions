@@ -26,8 +26,7 @@ class Solution {
         li.add(root.val);
         return li; 
     }
-    public void postorderNarray(Node root){
-        if(root == null) return; 
+    public void postorderNarray(Node root){ 
         int size = root.children.size();
         for(int i=0; i<size; i++){
             postorderNarray(root.children.get(i));
