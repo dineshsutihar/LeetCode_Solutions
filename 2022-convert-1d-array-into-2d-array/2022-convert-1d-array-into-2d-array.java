@@ -4,12 +4,9 @@ class Solution {
             return new int[0][0];
         }
         int[][] result = new int[m][n];
-        int index =0; 
-        for(int i =0; i<m; i++){
-            for(int j =0; j<n; j++){
-                result[i][j]=original[index];
-                index++; 
-            }
+        // int index =0; 
+        for(int i =0; i<original.length; i++){
+            result[i/n][i%n]=original[i];
         }
         return result; 
     }
