@@ -3,7 +3,7 @@ class Solution {
         int sum = 0; 
         for (int i = 0; i < chalk.length; i++) {
             sum += chalk[i];
-            if(sum > k){
+            if(sum > k){ // this was causing issue in long testcase
                 break; 
             }
         }
@@ -17,6 +17,6 @@ class Solution {
             k -= chalk[i];
         }
 
-        return -1; // This line will never be reached
+        return -1; 
     }
 }
