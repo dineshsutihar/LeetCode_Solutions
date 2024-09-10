@@ -10,18 +10,10 @@
  */
 class Solution {
     private int findGcd(int a, int b){
-        // if(a==0) return b; 
+        if(a==0) return b; 
 
-        // return findGcd(b%a, a); 
-        if(a == 1 || b==1){
-            return 1;
-        }
-        while(b !=0){
-            int rem = a % b;
-            a = b;
-            b= rem;
-        }
-        return a;
+        return findGcd(b%a, a); 
+        
     }
 
     public ListNode insertGreatestCommonDivisors(ListNode head) {
