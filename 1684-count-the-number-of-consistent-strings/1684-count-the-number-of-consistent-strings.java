@@ -8,8 +8,8 @@ class Solution {
         
         for(String word: words){
             boolean isTrue = false; 
-            for(char character: word.toCharArray()){
-                if(set.contains(character) != true){
+            for(int i =0; i<word.length(); i++){
+                if(set.contains(word.charAt(i)) != true){
                     isTrue =false; 
                     break; 
                 }
