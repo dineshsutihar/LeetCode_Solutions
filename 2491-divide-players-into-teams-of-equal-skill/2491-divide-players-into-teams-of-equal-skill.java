@@ -12,8 +12,7 @@ class Solution {
         int i =1, j = len-2; 
         
         while(i<j){
-            int currTeamSize = skill[i]+skill[j]; 
-            if(currTeamSize != eachTeamSize){
+            if((skill[i]+skill[j]) != eachTeamSize){
                 return -1; 
             }
             sum = sum+(skill[i]*skill[j]); 
