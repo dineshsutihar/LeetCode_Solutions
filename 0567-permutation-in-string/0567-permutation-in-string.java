@@ -4,16 +4,22 @@ class Solution {
         int m = s2.length(); 
         if(m<n) return false; 
         int[] map = new int[26];
+        int[] map1 = new int[26]; 
 
         for(int i =0; i<n; i++){
             map[s1.charAt(i) -'a']++; 
-        }
-        for(int i =0; i<=m-n; i++){
-            int[] map1 = new int[26]; 
+            map1[s2.charAt(i) -'a']++; 
 
-            for(int j =0; j<n; j++){
-                map1[s2.charAt(i+j) -'a']++; 
-            }
+        }
+//         initial case
+        if(isMatched(map, map1)){
+                return true; 
+        }
+        
+        for(int i =1; i<=m-n; i++){
+            map1[s2.charAt(i-1)-'a']--; 
+            map1[s2.charAt(i+n-1)-'a']++; 
+
             if(isMatched(map, map1)){
                 return true; 
             }
