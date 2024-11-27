@@ -66,6 +66,8 @@ class Solution {
             // Perform BFS to find the shortest path after adding the new road
             answer.add(bfs(n, adjList));
         }
+
+        // Convert List<Integer> to int[]
         return answer.stream().mapToInt(i -> i).toArray();
     }
 }
