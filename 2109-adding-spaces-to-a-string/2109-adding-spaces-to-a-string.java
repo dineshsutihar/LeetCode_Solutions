@@ -1,18 +1,15 @@
 class Solution {
     public String addSpaces(String s, int[] spaces) {
         StringBuilder sb = new StringBuilder(); 
-        int j =0; 
+        int j = 0; // Pointer to track the current position in the string `s`
         
-        for(int i =0; i<s.length(); i++){
-            if(j<spaces.length && i == spaces[j]){
-                sb.append(" "); 
-                sb.append(s.charAt(i)); 
-                j=j+1; 
-            }else{
-                sb.append(s.charAt(i)); 
-            }
-            
+        for (int i = 0; i < spaces.length; i++) {
+            sb.append(s.substring(j, spaces[i]));
+            sb.append(" ");
+            j = spaces[i];
         }
+    
+        sb.append(s.substring(j));
         
         return sb.toString(); 
     }
